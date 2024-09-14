@@ -8,13 +8,23 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 
-//JOBSHEET 3 PRAKTIKUM 5
+//JOBSHEET 3 PRAKTIKUM 6
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
+
+
+//JOBSHEET 3 PRAKTIKUM 5
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/level', [LevelController::class, 'index']);
+// Route::get('/kategori', [KategoriController::class, 'index']);
 
 
 //JOBSHEET 3 PRAKTIKUM 4
