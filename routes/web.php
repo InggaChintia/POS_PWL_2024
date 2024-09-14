@@ -6,14 +6,23 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\KategoriController;
 
-
-//JOBSHEET 3 PRAKTIKUM 4
+//JOBSHEET 3 PRAKTIKUM 5
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/level', [LevelController::class, 'index']);
+Route::get('/kategori', [KategoriController::class, 'index']);
+
+
+//JOBSHEET 3 PRAKTIKUM 4
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/level', [LevelController::class, 'index']);
 
 
 // Route::get('/', [HomeController::class, 'index'])->name('home');
