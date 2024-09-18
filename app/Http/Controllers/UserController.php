@@ -10,10 +10,57 @@ class UserController extends Controller
 {
     //JS 4 
     public function index() {
-        //PRAKTIKUM 2.3
-        $user = UserModel::where('level_id', 2)->count();
-        //dd($user);
+        //PRAKTIKUM 2.4
+        //UPDATE3
+        $user = UserModel::firstOrNew(
+            [
+                'username' => 'manager33',
+                'nama' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],
+        );
+        $user->save();
         return view('user', ['data' => $user]);
+        
+        
+        //UPDATE2
+        // $user = UserModel::firstOrNew(
+        //     [
+        //         'username' => 'manager33',
+        //         'nama' => 'Manager Tiga Tiga',
+        //         'password' => Hash::make('12345'),
+        //         'level_id' => 2
+        //     ],
+        // );
+        // return view('user', ['data' => $user]);
+
+
+        //UPDATE
+        // $user = UserModel::firstOrNew(
+        //     [
+        //         'username' => 'manager',
+        //         'nama' => 'Manager',
+        //     ],
+        // );
+        // return view('user', ['data' => $user]);
+
+
+        // $user = UserModel::firstOrCreate(
+        //     [
+        //         'username' => 'manager22',
+        //         'nama' => 'Manager Dua Dua',
+        //         'password' => Hash::make('12345'),
+        //         'level_id' => 2
+        //     ],
+        // );
+        // return view('user', ['data' => $user]);
+
+
+        //PRAKTIKUM 2.3
+        // $user = UserModel::where('level_id', 2)->count();
+        //dd($user);
+        // return view('user', ['data' => $user]);
 
         //PRAKTIKUM 2.2
         //UPDATE

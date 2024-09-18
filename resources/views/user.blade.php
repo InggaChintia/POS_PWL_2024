@@ -5,15 +5,32 @@
     </head>
     <body>
         <h1>Data User</h1>
-        {{-- JS4 PRAKTIKUM 2.3 --}}
+        {{-- JS4 PRAKTIKUM 2.4 --}}
         <table border="1" cellpadding="2" cellspacing="0">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Nama</th>
+                <th>ID Level Pengguna</th>
+            </tr>
+            <tr>
+                <td>{{ $data->user_id }}</td>
+                <td>{{ $data->username }}</td>
+                <td>{{ $data->nama }}</td>
+                <td>{{ $data->level_id }}</td>
+            </tr>
+        </table>
+
+
+        {{-- JS4 PRAKTIKUM 2.3 --}}
+        {{-- <table border="1" cellpadding="2" cellspacing="0">
             <tr>
                 <th>Jumlah Pengguna</th>
             </tr>
             <tr>
                 <td>{{ $data }}</td>
             </tr>
-        </table>
+        </table> --}}
 
         {{-- JS4 PRAKTIKUM 2.1 --}}
         {{-- <table border="1" cellpadding="2" cellspacing="0">
