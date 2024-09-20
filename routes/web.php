@@ -8,6 +8,15 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 
+
+//JOBSHEET 4 PRAKTIKUM 2.6
+Route::get('/user/tambah', [UserController::class, 'tambah']);
+Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
+
+
 //JOBSHEET 3 PRAKTIKUM 6
 Route::get('/', function () {
     return view('welcome');
