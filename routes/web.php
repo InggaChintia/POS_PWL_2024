@@ -7,6 +7,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\WelcomeController;
+
+//JOBSHEET 5 PRAKTIKUM 2
+Route::get('/', [WelcomeController::class, 'index']);
 
 
 //JOBSHEET 4 PRAKTIKUM 2.6
@@ -18,13 +22,13 @@ Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
 
 //JOBSHEET 3 PRAKTIKUM 6
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/level', [LevelController::class, 'index']);
-Route::get('/kategori', [KategoriController::class, 'index']);
-Route::get('/user', [UserController::class, 'index']);
+// Route::get('/level', [LevelController::class, 'index']);
+// Route::get('/kategori', [KategoriController::class, 'index']);
+// Route::get('/user', [UserController::class, 'index']);
 
 
 //JOBSHEET 3 PRAKTIKUM 5
