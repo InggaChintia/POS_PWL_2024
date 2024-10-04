@@ -10,13 +10,13 @@
             <div class="form-group row">
                 <label class="col-1 control-label col-form-label">Kategori</label>
                 <div class="col-11">
-                    <select class="form-control" id="fk_kategori_id" name="fk_kategori_id" required>
+                    <select class="form-control" id="kategori_id" name="kategori_id" required>
                         <option value="">- Pilih Kategori -</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
                         @endforeach
                     </select>
-                    @error('fk_kategori_id')
+                    @error('kategori_id')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
