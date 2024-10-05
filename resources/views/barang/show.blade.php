@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                     <th>Kategori</th>
-                    <td>{{ $barang->kategori->kategori_nama }}</td>
+                    <td>{{ $barang->kategori_id }}</td>
                 </tr>
                 <tr>
                     <th>Kode</th>
