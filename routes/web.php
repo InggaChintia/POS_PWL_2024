@@ -10,6 +10,19 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\AuthController;
+
+
+//JOBSHEET 7 PRAKTIKUM 1
+Route::pattern('id', '[0-9]+'); //artinya ketika ada parameter {id}, maka harus berupa angka
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'postlogin']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::middleware(['auth'])->group(function() { // semua route di dalam group harus login dulu
+    // masukkan semua route yang perlu autentikasi di sini
+});
 
 
 //JOBSHEET 6 PRAKTIKUM 1, 2, 3
