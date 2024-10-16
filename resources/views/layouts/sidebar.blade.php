@@ -22,24 +22,24 @@
       </li>
       <li class="nav-header">Data Pengguna</li>
       <li class="nav-item">
-        <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level')? 'active' : '' }} ">
-          {{-- <i class="nav-icon fas fa-layer-group"></i> --}}
-          <p>Level User</p>
+        <a href="{{ url('/level') }}" class="nav-link {{ $activeMenu == 'level' ? 'active' : '' }} ">
+            <i class="nav-icon fas fa-layer-group"></i>
+            <p>Level User</p>
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user')? 'active' : '' }}">
+        <a href="{{ url('/user') }}" class="nav-link {{ $activeMenu == 'user' ? 'active' : '' }}">
           <i class="nav-icon far fa-user"></i>
-          <p>Data User</p>
+            <p>Data User</p>
         </a>
       </li>
-    </li>
-    <li class="nav-item">
-        <a href="{{ url('/supplier') }}" class="nav-link {{ $activeMenu == 'supplier' ? 'active' : '' }}">
-            <i class="nav-icon far fa-user"></i>
-            <p>Data Supplier</p>
-        </a>
-    </li>
+      <li class="nav-header">Data Supplier</li>
+        <li class="nav-item">
+            <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier')? 'active' : '' }} ">
+                <i class="nav-icon far fa-user"></i>
+                <p>Data Supplier</p>
+            </a>
+        </li>
       <li class="nav-header">Data Barang</li>
       <li class="nav-item">
         <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu == 'kategori')? 'active' : '' }} ">
@@ -66,13 +66,15 @@
           <p>Transaksi Penjualan</p>
         </a>
       </li>
-      <li class="nav-header">Data Supplier</li>
-        <li class="nav-item">
-            <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier')? 'active' : '' }} ">
-                <i class="nav-icon far fa-user"></i>
-                <p>Data Supplier</p>
-            </a>
-        </li>
+      <li class="nav-item">
+        <form action="{{ url('/logout') }}" method="POST" id="logout-form" style="display: inline;">
+            @csrf
+            <button type="submit" class="nav-link" style="border: none; background: none; padding: 5px 10px; color: white; text-align: left;">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p style="margin: 0;">Logout</p>
+            </button>
+        </form>
+      </li>
     </ul>
   </nav>
 </div>

@@ -45,6 +45,7 @@ class UserModel extends Authenticatable
         return $this->level->level_kode == $role;
     }
     
+    //JS 7 PRAKTIKUM 3
     /**
      * Mendapatkan kode role
      */
