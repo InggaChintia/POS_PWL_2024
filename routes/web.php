@@ -68,8 +68,9 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::put('/{id}', [KategoriController::class, 'update']);
         Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [KategoriController::class, 'update_ajax']);
+        Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']);
         Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
-        Route::post('/{id}', [KategoriController::class, 'destroy']);
+        //Route::post('/{id}', [KategoriController::class, 'destroy']);
     });
 
     
@@ -102,14 +103,16 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::get('/create', [BarangController::class, 'create']);
         Route::post('/', [BarangController::class, 'store']);
         Route::get('/create_ajax', [BarangController::class, 'create_ajax']);
-        Route::post('/ajax', [BarangController::class, 'store_ajax']);
-        Route::get('/{id}/edit', [BarangController::class, 'edit']);
+        Route::post('/barang_ajax', [BarangController::class, 'store_ajax']);
         Route::get('/{id}', [BarangController::class, 'show']);
+        Route::get('/{id}/edit', [BarangController::class, 'edit']);
+        Route::put('/{id}', [BarangController::class, 'update']);
         Route::get('/{id}/edit_ajax', [BarangController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [BarangController::class, 'update_ajax']);
         Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']);
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
-        Route::put('/{id}', [BarangController::class, 'update']);
+        Route::get('/import',[BarangController::class,'import']); //ajax form upload excel
+        Route::post('/import_ajax',[BarangController::class,'import_ajax']); //ajax import excel
         Route::post('/{id}', [BarangController::class, 'destroy']);
     });
 
