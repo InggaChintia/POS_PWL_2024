@@ -156,7 +156,7 @@ class UserController extends Controller
                           ->with('level');
         
         //js 5 praktikum 4
-        //Filter data user berdasarkan lebel_id
+        //Filter data user berdasarkan level_id
         if ($request->level_id) {
             $users->where('level_id', $request->level_id);
         }

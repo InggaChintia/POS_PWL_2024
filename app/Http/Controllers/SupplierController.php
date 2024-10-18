@@ -78,23 +78,34 @@ class SupplierController extends Controller
         return redirect('/supplier')->with('success', 'Data supplier berhasil disimpan');
     }
     
-    public function show(string $id)
+    public function show(string $supplier_id)
     {
-        $supplier = SupplierModel::find($id);
-        $breadcrumb = (object) [
-            'title' => 'Detail supplier',
-            'list' => ['Home', 'supplier', 'Detail']
+        $supplier = SupplierModel::find($supplier_id);
+        if (!$supplier) {
+            return redirect('/supplier')->with('error', 'Data supplier tidak ditemukan');
+        }
+        $breadcrumb = (object)[
+            'title' => 'Detail Supplier',
+            'list' => ['Home', 'supplier', 'detail']
         ];
-        $page = (object) [
-            'title' => 'Detail supplier'
+        $page = (object)[
+            'title' => 'Detail Supplier'
         ];
-        $activeMenu = 'supplier'; // set menu yang sedang aktif
-        return view('supplier.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'supplier' => $supplier, 'activeMenu' => $activeMenu]);
+        $activeMenu = 'supplier';
+        return view('supplier.show', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'activeMenu' => $activeMenu,
+            'supplier' => $supplier
+        ]);
     }
     // Menampilkan halaman form edit supplier
     public function edit(string $id)
     {
         $supplier = SupplierModel::find($id);
+        if (!$supplier) {
+            return redirect('/supplier')->with('error', 'Data supplier tidak ditemukan');
+        }
         $breadcrumb = (object) [
             'title' => 'Edit supplier',
             'list' => ['Home', 'Supplier', 'Edit']
@@ -106,35 +117,35 @@ class SupplierController extends Controller
         return view('supplier.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'supplier' => $supplier, 'activeMenu' => $activeMenu]);
     }
     // Menyimpan perubahan data supplier
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $supplier_id)
     {
         $request->validate([
-            'supplier_kode' => 'required|string|max:10',
+            'supplier_kode' => 'required|string|min:3|max:5|unique:m_supplier,supplier_kode,' . $supplier_id . ',supplier_id', // Tambahkan pengecualian untuk update
             'supplier_nama' => 'required|string|max:100',
-            'supplier_alamat' => 'required|string|max:255',
+            'supplier_alamat' => 'required|string|max:255' // Memperpanjang batas maksimum untuk alamat
         ]);
-        SupplierModel::find($id)->update([
+        $supplier = SupplierModel::find($supplier_id);
+        if (!$supplier) {
+            return redirect('/supplier')->with('error', 'Data supplier tidak ditemukan');
+        }
+        $supplier->update([
             'supplier_kode' => $request->supplier_kode,
             'supplier_nama' => $request->supplier_nama,
-            'supplier_alamat' => $request->supplier_alamat,
-            
+            'supplier_alamat' => $request->supplier_alamat
         ]);
-        return redirect('/supplier')->with('success', 'Data supplier berhasil diubah');
+        return redirect('/supplier')->with('success', 'Data supplier berhasil diperbarui');
     }
-    
    
-    public function destroy(string $id)
+    public function destroy(string $supplier_id)
     {
-        $check = SupplierModel::find($id);
-        if (!$check) {
-            // untuk mengecek apakah data supplier dengan id yang dimaksud ada atau tidak
+        $supplier = SupplierModel::find($supplier_id);
+        if (!$supplier) {
             return redirect('/supplier')->with('error', 'Data supplier tidak ditemukan');
         }
         try {
-            SupplierModel::destroy($id); // Hapus data supplier
+            $supplier->delete(); // Menghapus supplier dengan cara yang lebih aman
             return redirect('/supplier')->with('success', 'Data supplier berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/supplier')->with('error', 'Data supplier gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }

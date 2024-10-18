@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
@@ -15,23 +16,8 @@
         @else
             <form method="POST" action="{{ url('/barang/'.$barang->barang_id) }}" class="form-horizontal">
                 @csrf
-                {!! method_field('PUT') !!} <!-- Method PUT for updating -->
-                <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Kategori</label>
-                    <div class="col-11">
-                        <select class="form-control" id="kategori_id" name="kategori_id" required>
-                            <option value="">- Pilih Kategori -</option>
-                            @foreach($kategori as $item)
-                                <option value="{{ $item->kategori_id }}" @if($item->kategori_id == $barang->kategori_id) selected @endif>
-                                    {{ $item->kategori_nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('kategori_id')
-                            <small class="form-text text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                </div>
+                {!! method_field('PUT') !!} <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Kode Barang</label>
                     <div class="col-11">
@@ -41,6 +27,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Nama Barang</label>
                     <div class="col-11">
@@ -50,6 +37,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Harga Beli</label>
                     <div class="col-11">
@@ -59,6 +47,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Harga Jual</label>
                     <div class="col-11">
@@ -68,6 +57,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label"></label>
                     <div class="col-11">
@@ -80,7 +70,9 @@
     </div>
 </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush

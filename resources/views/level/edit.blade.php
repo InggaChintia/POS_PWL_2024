@@ -1,9 +1,11 @@
 @extends('layouts.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
     </div>
+
     <div class="card-body">
         @empty($level)
             <div class="alert alert-danger alert-dismissible">
@@ -14,7 +16,8 @@
         @else
             <form method="POST" action="{{ url('/level/'.$level->level_id) }}" class="form-horizontal">
                 @csrf
-                {!! method_field('PUT') !!} 
+                {!! method_field('PUT') !!}
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Kode</label>
                     <div class="col-11">
@@ -24,6 +27,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Nama</label>
                     <div class="col-11">
@@ -33,6 +37,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label"></label>
                     <div class="col-11">
@@ -45,7 +50,9 @@
     </div>
 </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush
