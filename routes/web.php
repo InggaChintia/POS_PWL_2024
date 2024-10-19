@@ -113,6 +113,7 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
         Route::get('/import',[BarangController::class,'import']); //ajax form upload excel
         Route::post('/import_ajax',[BarangController::class,'import_ajax']); //ajax import excel
+        Route::get('/export_excel',[BarangController::class,'export_excel']); //expost excel
         Route::post('/{id}', [BarangController::class, 'destroy']);
     });
 
