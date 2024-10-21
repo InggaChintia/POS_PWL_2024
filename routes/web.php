@@ -12,6 +12,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegistrasiController;
+use App\Http\Controllers\StokController;
+
 
 
 //JOBSHEET 7 TUGAS 4
@@ -113,6 +115,8 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
         Route::get('/import',[BarangController::class,'import']); //ajax form upload excel
         Route::post('/import_ajax',[BarangController::class,'import_ajax']); //ajax import excel
+        Route::get('/export_excel',[BarangController::class,'export_excel']); //expost excel
+        Route::get('/export_pdf',[BarangController::class,'export_pdf']); //export pdf
         Route::post('/{id}', [BarangController::class, 'destroy']);
     });
 
@@ -134,6 +138,15 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']);
         Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']);
         Route::post('/{id}', [SupplierController::class, 'destroy']);
+    });
+
+    //STOK BARANG
+    Route::prefix('stok')->group(function () {
+        Route::get('/', [StokController::class, 'index'])->name('stok.index');
+        Route::get('/create', [StokController::class, 'create'])->name('stok.create');
+        Route::post('/store', [StokController::class, 'store'])->name('stok.store');
+        Route::get('/reduce/{id}', [StokController::class, 'reduce'])->name('stok.reduce');
+        Route::put('/update/{id}', [StokController::class, 'update'])->name('stok.update');
     });
 
 
