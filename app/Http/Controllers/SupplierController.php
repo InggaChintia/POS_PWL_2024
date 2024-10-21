@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\SupplierModel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator; 
+use PhpOffice\PhpSpreadsheet\IOFactory; 
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SupplierController extends Controller
 {
@@ -246,5 +248,59 @@ class SupplierController extends Controller
             ]);
         }
         redirect('/');
+    }
+
+    public function export_excel()
+    {
+        $supplier = SupplierModel::select('supplier_id', 'supplier_kode', 'supplier_nama')  
+            ->orderBy('Supplier_id')        
+            ->get();
+
+            $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $sheet->setCellValue('A1', 'No');
+            $sheet->setCellValue('B1', 'Kode Supplier');
+            $sheet->setCellValue('C1', 'Nama Supplier');
+
+            $sheet->getStyle('A1:C1')->getFont()->setBold(true);
+
+            $no = 1;
+            // nomor data dimulai dari 1
+            $baris = 2;
+            // baris data dimulai dari baris ke 2
+            foreach ($supplier as $key => $value) {
+                $sheet->setCellValue('A'.$baris, $no);
+                $sheet->setCellValue('B'.$baris, $value->supplier_kode);
+                $sheet->setCellValue('C'.$baris, $value->supplier_nama);
+                $baris++;
+                $no++;
+            }
+            foreach (range('A', 'C') as $columnID) {
+                $sheet->getColumnDimension($columnID)->setAutoSize(true);
+            }
+            $sheet->setTitle('Data Supplier'); 
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $filename = 'Data Supplier '.date('Y-m-d H:i:s').'.xlsx';
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="'.$filename.'"');
+            header('Cache-Control: cache, must-revalidate');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+            header('Last-Modified:'. gmdate('D, dMY H:i:s'). 'GMT'); 
+            header('Pragma: public');
+            $writer->save('php://output');
+            exit;
+    } 
+    public function export_pdf()
+    {
+        $supplier = SupplierModel::select('supplier_id', 'supplier_kode', 'supplier_nama')
+        ->orderBy('supplier_id') ->orderBy('supplier_kode')
+        ->get();
+
+        $pdf = Pdf::loadView('supplier.export_pdf', ['supplier' => $supplier]);
+        $pdf->setPaper ('a4', 'portrait'); // set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url $pdf->render();
+        return $pdf->stream ('Data Supplier '.date('Y-m-d H:i:s').'.pdf');
     }
 }

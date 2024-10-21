@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']);
         Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
         Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
+        Route::get('/export_excel', [LevelController::class, 'export_excel']);
+        Route::get('/export_pdf', [LevelController::class, 'export_pdf']);
         Route::post('/{id}', [LevelController::class, 'destroy']);
     });
 
@@ -72,6 +74,8 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::put('/{id}/update_ajax', [KategoriController::class, 'update_ajax']);
         Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']);
         Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
+        Route::get('/export_excel', [KategoriController::class, 'export_excel']);
+        Route::get('/export_pdf', [KategoriController::class, 'export_pdf']);
         //Route::post('/{id}', [KategoriController::class, 'destroy']);
     });
 
@@ -92,6 +96,8 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']);  //menyimpan perubahan data user Ajax
         Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']);  //untuk menampilkan form confirm delete user Ajax
         Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']); //untuk hapus data user Ajax
+        Route::get('/export_excel', [UserController::class, 'export_excel']);
+        Route::get('/export_pdf', [UserController::class, 'export_pdf']);
         Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
     });
 
@@ -137,6 +143,8 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::put('/{id}/update_ajax', [SupplierController::class, 'update_ajax']);
         Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']);
         Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']);
+        Route::get('/supplier/export_excel', [SupplierController::class, 'export_excel']);
+        Route::get('/supplier/export_pdf', [SupplierController::class, 'export_pdf']);
         Route::post('/{id}', [SupplierController::class, 'destroy']);
     });
 
@@ -145,7 +153,7 @@ Route::middleware(['auth'])->group(function() { // semua route di dalam group ha
         Route::get('/', [StokController::class, 'index'])->name('stok.index');
         Route::get('/create', [StokController::class, 'create'])->name('stok.create');
         Route::post('/store', [StokController::class, 'store'])->name('stok.store');
-        Route::get('/reduce/{id}', [StokController::class, 'reduce'])->name('stok.reduce');
+        Route::get('/{id}', [StokController::class, 'reduce'])->name('stok.reduce');
         Route::put('/update/{id}', [StokController::class, 'update'])->name('stok.update');
     });
 
