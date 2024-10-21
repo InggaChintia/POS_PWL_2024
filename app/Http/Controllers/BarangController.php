@@ -376,8 +376,7 @@ class BarangController extends Controller
         // Simpan dan kirim output
         $writer->save('php://output');
         exit;
-    } //end function export_excel
-
+    } //end function export_excel`
 
     //JS 8 PRAKTIKUM 3
     public function export_pdf(){
