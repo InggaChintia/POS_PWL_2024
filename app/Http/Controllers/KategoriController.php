@@ -216,6 +216,12 @@ class KategoriController extends Controller
         return redirect('/');
     }
 
+    public function show_ajax(string $id){
+        $kategori = KategoriModel::find($id);
+
+        return view('kategori.show_ajax', ['kategori' => $kategori]);
+    }
+
     public function confirm_ajax(string $id)
     {
         $kategori = KategoriModel::find($id);
@@ -283,7 +289,7 @@ class KategoriController extends Controller
             $writer->save('php://output');
             exit;
     } 
-    
+
     public function export_pdf()
     {
         $kategori = KategoriModel::select('kategori_id', 'kategori_kode', 'kategori_nama')
@@ -295,6 +301,7 @@ class KategoriController extends Controller
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url $pdf->render();
         return $pdf->stream ('Data Kategori '.date('Y-m-d H:i:s').'.pdf');
     }
+    
 }
 
     // public function index()

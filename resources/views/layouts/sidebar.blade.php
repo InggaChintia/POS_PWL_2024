@@ -14,6 +14,12 @@
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <li class="nav-item">
+        <a href="{{ url('/profile') }}" class="nav-link {{ ($activeMenu == 'profile') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>Profile</p>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{{ url('/') }}" class="nav-link  {{ ($activeMenu == 'dashboard')?
           'active' : '' }} ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -61,7 +67,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{ url('/transaksi') }}" class="nav-link {{ ($activeMenu == 'penjualan')? 'active' : '' }} ">
+        <a href="{{ url('/penjualan') }}" class="nav-link {{ ($activeMenu == 'penjualan')? 'active' : '' }} ">
           <i class="nav-icon fas fa-cash-register"></i>
           <p>Transaksi Penjualan</p>
         </a>
